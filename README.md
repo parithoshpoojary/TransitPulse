@@ -1,11 +1,6 @@
 ---
 icon: taxi-bus
-cover: .gitbook/assets/Gemini_Generated_Image_lt61z3lt61z3lt61.jpg
-coverY: 341.72799999999995
 layout:
-  cover:
-    visible: true
-    size: hero
   title:
     visible: true
   description:
@@ -32,3 +27,5 @@ layout:
 * **Dockerized Setup:** Provides Docker and Docker Compose configurations for seamless setup and deployment of Kafka, Cassandra, and the application itself.
 * **Extensible and Configurable:** Easily customizable and extensible to suit various public transportation systems, with flexible configuration options for Kafka and Cassandra.
 * **Comprehensive Monitoring:** Includes integration with monitoring tools to track system performance and health, ensuring operational reliability.
+
+For more info about the architecture and setting up the application; head over to [https://parithosh-organization.gitbook.io/transitpuls/](https://parithosh-organization.gitbook.io/transitpuls/)
