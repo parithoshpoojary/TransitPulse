@@ -1,7 +1,3 @@
----
-description: Architecture of the TransitPulse system.
----
-
 # Architecture
 
 The architecture of TransitPulse is designed for scalability and efficiency. Below is a detailed explanation of each component within the system.
