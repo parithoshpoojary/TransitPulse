@@ -1,18 +1,3 @@
----
-icon: taxi-bus
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
----
-
 # TransitPulse
 
 **TransitPulse** is an innovative solution designed to monitor and visualize the real-time locations of public transport vehicles. This project integrates powerful technologies such as Apache Kafka for data streaming, Spring Boot for backend processing, and Angular for front-end visualization, offering a comprehensive and scalable system.
