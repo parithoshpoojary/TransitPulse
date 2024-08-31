@@ -1,0 +1,43 @@
+services:
+  zookeeper:
+    image: zookeeper:3.6.2
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+
+  kafka-ui:
+    image: obsidiandynamics/kafdrop
+    container_name: kafka-ui
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: kafka:9092
+      KAFKA_BROKERCONNECT: kafka:9092
+    depends_on:
+      - kafka
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: transitPulse-backend
+    ports:
+      - "8080:8080"  # backend service runs on port 8080 internally
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - kafka

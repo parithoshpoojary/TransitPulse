@@ -1,0 +1,12 @@
+org:
+  junit:
+    platform:
+      launcher:
+        core:
+          LauncherConfigurationParameters:
+            level: "WARNING"
+    jupiter:
+      engine:
+        config:
+          EnumConfigurationParameterConverter:
+            level: "WARNING"

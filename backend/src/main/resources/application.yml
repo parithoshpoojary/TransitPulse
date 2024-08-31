@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: transitpulse-backend
+  profiles:
+    active: dev
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: transitpulse-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: vehicle-location
+
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.kafka: DEBUG
+    com.transitpulse: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,refresh,loggers
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    kafka:
+      enabled: true
+
+server:
+  port: 8080
+
