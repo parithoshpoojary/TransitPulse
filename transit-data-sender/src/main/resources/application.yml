@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: transit-data-sender
+  profiles:
+    active: data-sender-dev
+  kafka:
+    bootstrap-servers: http://localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    template:
+      default-topic: vehicle-location
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,beans,env,health
+
+info:
+  application:
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+
+data:
+  source:
+    scheduler: true
+    rest: true
+
+server:
+  port: 7070
