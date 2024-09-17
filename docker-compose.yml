@@ -9,11 +9,12 @@ services:
     image: bitnami/kafka:latest
     container_name: kafka
     environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: PLAINTEXT://:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
     depends_on:
@@ -25,10 +26,11 @@ services:
     ports:
       - "9000:9000"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: kafka:9092
       KAFKA_BROKERCONNECT: kafka:9092
+      JVM_OPTS: "-Dlog4j.configuration=file:/kafdrop/log4j.properties"
     depends_on:
       - kafka
+    command: [ "sh", "-c", "sleep 10 && ./kafdrop.sh" ]
 
   backend:
     build:
